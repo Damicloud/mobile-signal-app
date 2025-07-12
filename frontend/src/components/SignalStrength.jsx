@@ -92,15 +92,34 @@ const SignalStrengthApp = () => {
     }
   };
 
+  // Fixed signal strength calculation
   const getSignalStrength = (location, network) => {
-    const data = mockSignalData[location.name];
-    if (!data) return 0;
-    
-    if (network === 'all') {
-      return Math.round((data.mtn + data.airtel + data.glo + data['9mobile']) / 4);
+    // First check if location exists in mockSignalData
+    const mockData = mockSignalData[location.name];
+    if (mockData) {
+      if (network === 'all') {
+        return Math.round((mockData.mtn + mockData.airtel + mockData.glo + mockData['9mobile']) / 4);
+      }
+      return mockData[network] || 0;
     }
     
-    return data[network] || 0;
+    // If not in mockSignalData, generate realistic signal strength
+    // Use location name as seed for consistent results
+    const seed = location.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const random = (seed * 9301 + 49297) % 233280; // Simple pseudo-random generator
+    
+    const baseSignal = {
+      mtn: Math.floor((random % 30) + 60),     // 60-90%
+      airtel: Math.floor(((random * 2) % 35) + 55), // 55-90%
+      glo: Math.floor(((random * 3) % 40) + 50),    // 50-90%
+      '9mobile': Math.floor(((random * 4) % 35) + 45) // 45-80%
+    };
+    
+    if (network === 'all') {
+      return Math.round((baseSignal.mtn + baseSignal.airtel + baseSignal.glo + baseSignal['9mobile']) / 4);
+    }
+    
+    return baseSignal[network] || 0;
   };
 
   const getSignalColor = (strength) => {
