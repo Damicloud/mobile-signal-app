@@ -13,8 +13,9 @@ app.use(cors({
     'http://localhost:3000', // Alternative port
     'http://localhost:3001',
     'http://127.0.0.1:5173',
-    /vercel\.app$/, // Allow all vercel.app domains
-    /netlify\.app$/ // Allow netlify domains if frontend uses netlify
+    /\.vercel\.app$/, // Allow all vercel.app domains
+    'https://telecom-signal-strength.vercel.app', // Allow deployed Vercel app
+    'https://moyo-made.github.io/telecom-signal-strength' // Allow frontend's live/deployed URL
   ],
   credentials: true
 }));
