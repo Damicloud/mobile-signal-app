@@ -5,8 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { mockLocations, mockSignalData, networks } from '../mockData/location';
-
+import { mockSignalData, networks } from '../mockData/location';
 
 const SignalStrengthApp = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,6 +15,48 @@ const SignalStrengthApp = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState([]);
+  
+  // New state for API integration
+  const [lagosLocations, setLagosLocations] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Fetch Lagos locations from your API
+  useEffect(() => {
+    const fetchLagosLocations = async () => {
+      setLoading(true);
+      setError(null);
+      
+      try {
+        const response = await fetch('https://mobilesignalbackends.vercel.app/api/locations');
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch locations');
+        }
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Convert API response to the format expected by the component
+          const formattedLocations = data.locations.map((location, index) => ({
+            id: index + 1,
+            name: location,
+            state: 'Lagos State' // All are Lagos locations
+          }));
+          setLagosLocations(formattedLocations);
+        } else {
+          setError('Failed to load locations');
+        }
+      } catch (err) {
+        setError('Error connecting to server');
+        console.error('Error fetching Lagos locations:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLagosLocations();
+  }, []);
 
   useEffect(() => {
     if (searchTerm.trim() === '') {
@@ -25,7 +66,8 @@ const SignalStrengthApp = () => {
       return;
     }
 
-    const filtered = mockLocations.filter(location =>
+    // Filter using Lagos locations from API instead of mockLocations
+    const filtered = lagosLocations.filter(location =>
       location.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       location.state.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -33,7 +75,7 @@ const SignalStrengthApp = () => {
     setFilteredLocations(filtered);
     setShowDropdown(filtered.length > 0);
     setNotFound(filtered.length === 0);
-  }, [searchTerm]);
+  }, [searchTerm, lagosLocations]);
 
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
@@ -93,9 +135,28 @@ const SignalStrengthApp = () => {
             Network Signal Finder
           </h1>
           <p className="text-gray-600">
-            Check mobile network strength across Nigeria
+            Check mobile network strength across Lagos
           </p>
         </div>
+
+        {/* Loading/Error States */}
+        {loading && (
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading Lagos locations...</p>
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <Alert className="border-red-200 bg-red-50 mb-6">
+            <X className="h-4 w-4 text-red-500" />
+            <AlertDescription className="text-red-700">
+              {error}. Please try again later.
+            </AlertDescription>
+          </Alert>
+        )}
 
         {/* Search Section */}
         <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
@@ -111,8 +172,9 @@ const SignalStrengthApp = () => {
                   type="text"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Enter city name..."
+                  placeholder="Enter Lagos area name..."
                   className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  disabled={loading}
                 />
               </div>
               
@@ -160,7 +222,7 @@ const SignalStrengthApp = () => {
             {/* Search Button */}
             <Button
               onClick={handleSearch}
-              disabled={!selectedLocation}
+              disabled={!selectedLocation || loading}
               className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               Check Signal Strength
@@ -171,7 +233,7 @@ const SignalStrengthApp = () => {
               <Alert className="border-red-200 bg-red-50">
                 <X className="h-4 w-4 text-red-500" />
                 <AlertDescription className="text-red-700">
-                  Location not found. Please try a different search.
+                  Location not found. Please try a different Lagos area.
                 </AlertDescription>
               </Alert>
             )}
@@ -179,24 +241,26 @@ const SignalStrengthApp = () => {
         </div>
 
         {/* Quick Access */}
-        <div className="bg-white rounded-2xl shadow-lg p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Locations</h3>
-          <div className="grid grid-cols-2 gap-3">
-            {mockLocations.slice(0, 6).map((location) => (
-              <Button
-                key={location.id}
-                onClick={() => handleLocationSelect(location)}
-                variant="outline"
-                className="h-auto p-3 text-left justify-start border-gray-200 hover:bg-gray-50"
-              >
-                <div>
-                  <div className="font-medium text-gray-900">{location.name}</div>
-                  <div className="text-sm text-gray-500">{location.state}</div>
-                </div>
-              </Button>
-            ))}
+        {!loading && lagosLocations.length > 0 && (
+          <div className="bg-white rounded-2xl shadow-lg p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Lagos Areas</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {lagosLocations.slice(0, 6).map((location) => (
+                <Button
+                  key={location.id}
+                  onClick={() => handleLocationSelect(location)}
+                  variant="outline"
+                  className="h-auto p-3 text-left justify-start border-gray-200 hover:bg-gray-50"
+                >
+                  <div>
+                    <div className="font-medium text-gray-900">{location.name}</div>
+                    <div className="text-sm text-gray-500">{location.state}</div>
+                  </div>
+                </Button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Modal */}
