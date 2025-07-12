@@ -1,0 +1,182 @@
+{
+  "Ikeja": {
+    "MTN": "Excellent",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Victoria Island": {
+    "MTN": "Excellent",
+    "Airtel": "Excellent",
+    "Glo": "Good",
+    "9mobile": "Fair"
+  },
+  "Lekki": {
+    "MTN": "Excellent",
+    "Airtel": "Good",
+    "Glo": "Good",
+    "9mobile": "Fair"
+  },
+  "Ikoyi": {
+    "MTN": "Excellent",
+    "Airtel": "Excellent",
+    "Glo": "Good",
+    "9mobile": "Good"
+  },
+  "Surulere": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Yaba": {
+    "MTN": "Excellent",
+    "Airtel": "Good",
+    "Glo": "Good",
+    "9mobile": "Fair"
+  },
+  "Gbagada": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Ketu": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Ojodu": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Berger": {
+    "MTN": "Fair",
+    "Airtel": "Fair",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Oshodi": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Mushin": {
+    "MTN": "Fair",
+    "Airtel": "Fair",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Agege": {
+    "MTN": "Fair",
+    "Airtel": "Poor",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Alimosho": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Kosofe": {
+    "MTN": "Fair",
+    "Airtel": "Fair",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Shomolu": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Ifako-Ijaye": {
+    "MTN": "Fair",
+    "Airtel": "Poor",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Amuwo-Odofin": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Fair"
+  },
+  "Lagos Mainland": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Fair"
+  },
+  "Apapa": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Eti-Osa": {
+    "MTN": "Excellent",
+    "Airtel": "Good",
+    "Glo": "Good",
+    "9mobile": "Fair"
+  },
+  "Badagry": {
+    "MTN": "Fair",
+    "Airtel": "Poor",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Ikorodu": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Epe": {
+    "MTN": "Fair",
+    "Airtel": "Poor",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  },
+  "Lagos Island": {
+    "MTN": "Excellent",
+    "Airtel": "Excellent",
+    "Glo": "Good",
+    "9mobile": "Good"
+  },
+  "Ajah": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Fair"
+  },
+  "Festac": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Magodo": {
+    "MTN": "Good",
+    "Airtel": "Good",
+    "Glo": "Fair",
+    "9mobile": "Fair"
+  },
+  "Ojota": {
+    "MTN": "Good",
+    "Airtel": "Fair",
+    "Glo": "Fair",
+    "9mobile": "Poor"
+  },
+  "Mile 2": {
+    "MTN": "Fair",
+    "Airtel": "Fair",
+    "Glo": "Poor",
+    "9mobile": "Poor"
+  }
+}
